@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid World Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Generate n x n Square</h1>
+    
+    <div class="controls">
+        <label for="gridSize">Enter a number between 5 and 9:</label>
+        <input type="number" id="gridSize" min="5" max="9" value="5">
+        <button onclick="generateGrid()">Generate Square</button>
+    </div>
+
+    <h2 id="gridTitle" style="display: none;"></h2>
+    <div id="instruction"></div>
+
+    <div id="gridContainer"></div>
+
+    <button id="calculateBtn" onclick="calculatePolicy()">計算策略與價值 (Calculate)</button>
+
+    <div id="results" class="result-container" style="display: none;">
+        <div class="matrix-wrapper">
+            <h3>Value Matrix</h3>
+            <div id="valueGrid"></div>
+        </div>
+        <div class="matrix-wrapper">
+            <h3>Policy Matrix</h3>
+            <div id="policyGrid"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
