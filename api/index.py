@@ -122,6 +122,3 @@ def calculate():
         'hw3_policy': p_hw3,
         'hw3_path': optimal_path_hw3 
     })
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
