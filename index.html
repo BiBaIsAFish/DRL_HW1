@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid World Generator</title>
+    <title>RL Grid World: Value Iteration</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Generate n x n Square</h1>
+    <h1>Grid World: Reinforcement Learning</h1>
     
     <div class="controls">
-        <label for="gridSize">Enter a number between 5 and 9:</label>
+        <label>Enter a number between 5 and 9:</label>
         <input type="number" id="gridSize" min="5" max="9" value="5">
         <button onclick="generateGrid()">Generate Square</button>
     </div>
@@ -21,16 +21,33 @@
 
     <div id="gridContainer"></div>
 
-    <button id="calculateBtn" onclick="calculatePolicy()">計算策略與價值 (Calculate) ↓</button>
+    <button id="calculateBtn" onclick="submitToFlask()">計算策略與價值 (Submit to Flask)</button>
 
-    <div id="results" class="result-container" style="display: none;">
-        <div class="matrix-wrapper">
-            <h3>Value Matrix</h3>
-            <div id="valueGrid"></div>
+    <div id="results" style="display: none;">
+        <hr>
+        <h2 style="color: #555;">HW1-2: Policy Evaluation (Random Policy)</h2>
+        <div class="result-container">
+            <div class="matrix-wrapper">
+                <h3>Value Function V(s)</h3>
+                <div id="hw2ValueGrid"></div>
+            </div>
+            <div class="matrix-wrapper">
+                <h3>Policy Matrix</h3>
+                <div id="hw2PolicyGrid"></div>
+            </div>
         </div>
-        <div class="matrix-wrapper">
-            <h3>Policy Matrix</h3>
-            <div id="policyGrid"></div>
+
+        <hr>
+        <h2 style="color: #b30000;">HW1-3: Value Iteration (Optimal Policy)</h2>
+        <div class="result-container">
+            <div class="matrix-wrapper">
+                <h3>Optimal Value V*(s)</h3>
+                <div id="hw3ValueGrid"></div>
+            </div>
+            <div class="matrix-wrapper">
+                <h3>Optimal Policy</h3>
+                <div id="hw3PolicyGrid"></div>
+            </div>
         </div>
     </div>
 
