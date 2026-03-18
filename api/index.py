@@ -99,7 +99,7 @@ def value_iteration(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
     policy = derive_policy(V, grid_size, end, obstacles, gamma)
     return V, policy
 
-@app.route('/calculate', methods=['POST'])
+@app.route('/api/calculate', methods=['POST'])
 def calculate():
     data = request.json
     size = data['size']
