@@ -17,6 +17,7 @@ function generateGrid() {
     document.getElementById('gridTitle').style.display = 'block';
     document.getElementById('gridTitle').innerText = `${n} x ${n} Square:`;
     document.getElementById('calculateBtn').style.display = 'none';
+    document.getElementById('resetBtn').style.display = 'block';
     document.getElementById('results').style.display = 'none';
     updateInstruction();
 
@@ -62,11 +63,32 @@ function handleCellClick(cellElement, i, j) {
 }
 
 function updateInstruction() {
-    const inst = document.getElementById('instruction');
-    if (clickState === 0) { inst.innerText = "1. Click to set START (Green)."; inst.style.color = "green"; } 
-    else if (clickState === 1) { inst.innerText = "2. Click to set END (Red)."; inst.style.color = "red"; } 
-    else if (clickState === 2) { inst.innerText = `3. Click to set Obstacles (Grey). ${obstaclesLeft} left.`; inst.style.color = "grey"; } 
-    else if (clickState === 3) { inst.innerText = "Setup complete! Ready to calculate."; inst.style.color = "blue"; }
+    // 1. 先把所有步驟的「高亮狀態」移除
+    document.getElementById('step1').classList.remove('active-step');
+    document.getElementById('step2').classList.remove('active-step');
+    document.getElementById('step3').classList.remove('active-step');
+    document.getElementById('step4').style.display = 'none';
+
+    // 2. 根據目前的點擊狀態，點亮對應的步驟
+    if (clickState === 0) {
+        document.getElementById('step1').classList.add('active-step');
+        document.getElementById('step3').innerText = "Step 3: Click to set Obstacles (Grey)";
+    } else if (clickState === 1) {
+        document.getElementById('step2').classList.add('active-step');
+    } else if (clickState === 2) {
+        document.getElementById('step3').classList.add('active-step');
+        document.getElementById('step3').innerText = `Step 3: Click to set Obstacles (Grey). ${obstaclesLeft} left.`;
+    } else if (clickState === 3) {
+        // 設定完成，顯示完成文字
+        document.getElementById('step4').style.display = 'block';
+    }
+}
+
+// 新增的 Reset 函數
+function resetGrid() {
+    // 其實我們原本寫好的 generateGrid() 裡面就包含了重置所有變數和清空網格的邏輯
+    // 所以直接呼叫它，就能完美達到 Reset 的效果！
+    generateGrid(); 
 }
 
 async function submitToFlask() {

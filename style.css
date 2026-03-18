@@ -6,7 +6,6 @@ body { font-family: Arial, sans-serif; margin: 40px; }
 .cell-start { background-color: green; color: white; font-weight: bold; }
 .cell-end { background-color: red; color: white; font-weight: bold; }
 .cell-obstacle { background-color: grey; color: black; }
-#instruction { font-size: 18px; font-weight: bold; margin-top: 10px; margin-bottom: 20px;}
 #calculateBtn { padding: 10px 20px; font-size: 16px; background-color: #007BFF; color: white; border: none; cursor: pointer; display: none; border-radius: 4px; margin-top: 20px;}
 #calculateBtn:hover { background-color: #0056b3; }
 .result-container { display: flex; gap: 40px; margin-top: 15px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -60,4 +59,50 @@ hr { border: 0; height: 1px; background: #ccc; margin: 30px 0; }
     font-size: 16px; 
     user-select: none; 
     text-align: center;
+}
+
+/* --- 步驟提示區塊樣式 --- */
+#instruction-steps {
+    margin: 15px 0;
+}
+
+#instruction-steps p {
+    color: #bbb; /* 預設為淡灰色，表示未進行或已完成 */
+    margin: 5px 0;
+    font-size: 16px;
+    transition: color 0.3s ease; /* 讓顏色切換有平滑的動畫感 */
+}
+
+/* 正在進行中的步驟，會套用這個 class 變黑變粗 */
+#instruction-steps p.active-step {
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#step4 {
+    color: #007BFF; /* 完成提示用藍色 */
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* --- 按鈕排版 --- */
+.action-buttons {
+    display: flex;
+    gap: 15px; /* 讓兩個按鈕中間有空隙 */
+    margin-top: 20px;
+}
+
+#resetBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6c757d; /* 灰色按鈕 */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#resetBtn:hover {
+    background-color: #5a6268;
 }

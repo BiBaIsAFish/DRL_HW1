@@ -17,12 +17,21 @@
     </div>
 
     <h2 id="gridTitle" style="display: none;"></h2>
-    <div id="instruction"></div>
+    
+    <div id="instruction-steps">
+        <p id="step1">Step 1: Click to set START (Green)</p>
+        <p id="step2">Step 2: Click to set END (Red)</p>
+        <p id="step3">Step 3: Click to set Obstacles (Grey)</p>
+        <p id="step4" style="display:none;">Setup complete! Ready to calculate.</p>
+    </div>
 
     <div id="gridContainer"></div>
 
-    <button id="calculateBtn" onclick="submitToFlask()">計算策略與價值 (Submit to Flask)</button>
-
+    <div class="action-buttons">
+        <button id="resetBtn" onclick="resetGrid()" style="display: none;">Reset Grid</button>
+        <button id="calculateBtn" onclick="submitToFlask()" style="display: none;">計算策略與價值 (Calculate)</button>
+    </div>
+    
     <div id="results" style="display: none;">
         <hr>
         <h2 style="color: #555;">HW1-2: Policy Evaluation (Random Policy)</h2>
