@@ -92,6 +92,11 @@ function resetGrid() {
 }
 
 async function submitToFlask() {
+    if (!hasValidPath()) {
+        alert("⚠️ 錯誤：起點和終點之間被障礙物完全阻擋，找不到可通行的路徑！請點擊 Reset Grid 重新設定。");
+        return; // 直接中斷執行，不會把資料傳給 Flask 浪費運算資源
+    }
+
     try {
         const response = await fetch('/api/calculate', {
             method: 'POST',
@@ -175,4 +180,54 @@ function renderResultGrid(containerId, matrixData, type, optimalPath = null) {
         }
         container.appendChild(rowDiv);
     }
+}
+
+// --- 新增：使用 BFS (廣度優先搜尋) 檢查是否有路徑 ---
+function hasValidPath() {
+    const size = mapData.size;
+    const start = mapData.start;
+    const end = mapData.end;
+    const obstacles = mapData.obstacles;
+
+    // 判斷是否為障礙物的輔助函數
+    const isObstacle = (r, c) => obstacles.some(obs => obs[0] === r && obs[1] === c);
+    
+    // 建立一個紀錄是否走過的矩陣
+    let visited = Array.from({ length: size }, () => Array(size).fill(false));
+    
+    // 將起點放入佇列
+    let queue = [start];
+    visited[start[0]][start[1]] = true;
+
+    // 上下左右四個方向
+    const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+    while (queue.length > 0) {
+        let current = queue.shift();
+        let r = current[0];
+        let c = current[1];
+
+        // 如果走到終點，代表有路徑！
+        if (r === end[0] && c === end[1]) {
+            return true;
+        }
+
+        // 探索四個方向
+        for (let dir of dirs) {
+            let nextR = r + dir[0];
+            let nextC = c + dir[1];
+
+            // 檢查是否超出邊界
+            if (nextR >= 0 && nextR < size && nextC >= 0 && nextC < size) {
+                // 如果不是障礙物，且還沒走過
+                if (!isObstacle(nextR, nextC) && !visited[nextR][nextC]) {
+                    visited[nextR][nextC] = true;
+                    queue.push([nextR, nextC]);
+                }
+            }
+        }
+    }
+    
+    // 佇列都清空了還是沒找到終點，代表被死路包圍
+    return false;
 }
