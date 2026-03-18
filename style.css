@@ -1,32 +1,44 @@
-/* --- 全局設定 --- */
+/* =========================================
+   全局變數設定 (CSS Variables)
+   - 使用 Material Design 色系，方便未來快速抽換主題色
+========================================= */
 :root {
-    --bg-color: #f4f7f6;
-    --text-main: #2d3748;
-    --text-muted: #a0aec0;
-    --primary: #4299e1;
+    --bg-color: #f4f7f6;        /* 網頁背景色 (淺灰白) */
+    --text-main: #2d3748;       /* 主要文字顏色 (深灰) */
+    --text-muted: #a0aec0;      /* 次要/提示文字顏色 (淺灰) */
+    
+    --primary: #4299e1;         /* 主題色 (藍色) */
     --primary-hover: #3182ce;
-    --success: #48bb78;
+    
+    --success: #48bb78;         /* 成功/起點/最佳政策顏色 (綠色) */
     --success-hover: #38a169;
-    --danger: #f56565;
-    --gray-bg: #e2e8f0;
-    --obstacle: #718096;
-    --path-bg: #c6f6d5;
-    --path-arrow: #22543d;
-    --normal-arrow: #a0aec0;
-    --border-color: #cbd5e0;
+    
+    --danger: #f56565;          /* 終點顏色 (紅色) */
+    
+    --obstacle: #718096;        /* 障礙物顏色 (鐵灰) */
+    --gray-bg: #e2e8f0;         /* 網格預設邊框色 */
+    
+    --path-bg: #c6f6d5;         /* 最佳路徑高亮背景色 (淺綠) */
+    --path-arrow: #22543d;      /* 最佳路徑上的箭頭顏色 (深綠) */
+    --normal-arrow: #a0aec0;    /* 非最佳路徑的箭頭顏色 (淺灰) */
+    --border-color: #cbd5e0;    /* 卡片與輸入框邊框色 */
 }
 
+/* =========================================
+   基礎排版設定
+========================================= */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
     margin: 0;
     padding: 40px 20px;
+    /* 使用 Flexbox 將主內容水平置中 */
     display: flex;
     justify-content: center;
 }
 
-/* --- 主容器 --- */
+/* 主容器：限制最大寬度，確保在大螢幕上不會過度拉伸 */
 .app-container {
     max-width: 1000px;
     width: 100%;
@@ -35,6 +47,9 @@ body {
     align-items: center;
 }
 
+/* =========================================
+   標題與卡片式設計 (Card UI)
+========================================= */
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -46,6 +61,7 @@ h1 {
     color: #1a202c;
 }
 
+/* 標題旁的小標籤 (RL) */
 .badge {
     background: var(--primary);
     color: white;
@@ -61,7 +77,7 @@ h1 {
     font-weight: 300;
 }
 
-/* --- 卡片式設計 --- */
+/* 共用卡片樣式：帶有柔和陰影與圓角 */
 .card, .result-card {
     background: white;
     padding: 25px 40px;
@@ -73,11 +89,14 @@ h1 {
     text-align: center;
 }
 
+/* 最佳政策結果卡的頂部綠色高亮線 */
 .highlight-card {
     border-top: 5px solid var(--success);
 }
 
-/* --- 控制面板 --- */
+/* =========================================
+   控制面板與表單輸入
+========================================= */
 .controls label {
     font-weight: 600;
     margin-right: 10px;
@@ -93,12 +112,15 @@ h1 {
     font-family: inherit;
 }
 
+/* 輸入框聚焦時的藍色光暈 */
 .controls input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
 }
 
-/* --- 按鈕樣式 --- */
+/* =========================================
+   按鈕與互動特效 (Buttons)
+========================================= */
 button {
     padding: 10px 24px;
     font-size: 16px;
@@ -107,10 +129,11 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; /* 按下與懸停的平滑轉場 */
     margin-left: 10px;
 }
 
+/* 利用 transform 做出滑過按鈕微微上浮的效果 */
 .btn-primary { background: var(--primary); color: white; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
@@ -118,16 +141,22 @@ button {
 .btn-secondary:hover { background: var(--border-color); transform: translateY(-2px); }
 
 .btn-success { background: var(--success); color: white; }
-.btn-success:hover { background: var(--success-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); }
+.btn-success:hover { 
+    background: var(--success-hover); 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3); 
+}
 
 .action-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 15px; /* 按鈕之間的間距 */
     margin-top: 25px;
 }
 
-/* --- 步驟提示 --- */
+/* =========================================
+   步驟提示區塊 (Step Instructions)
+========================================= */
 #instruction-steps {
     margin: 20px 0;
     text-align: left;
@@ -145,29 +174,34 @@ button {
     transition: all 0.3s ease;
 }
 
+/* 正在進行中的步驟高亮特效 */
 #instruction-steps p.active-step {
     color: var(--primary);
     font-weight: 700;
-    transform: translateX(5px);
+    transform: translateX(5px); /* 微微向右縮排突出顯示 */
 }
 
 #step4 { color: var(--success) !important; font-weight: 700; }
 
-/* --- 網格容器 --- */
+/* =========================================
+   互動網格系統 (Grid System)
+========================================= */
 .grid-wrapper {
     display: flex;
     justify-content: center;
 }
 
+/* 網格主容器 */
 #gridContainer, .grid-shadow {
     display: inline-flex;
     flex-direction: column;
-    border: 2px solid #2d3748; /* 外框加粗 */
+    border: 2px solid #2d3748;
     border-radius: 8px;
-    overflow: hidden; /* 讓圓角生效 */
+    overflow: hidden; /* 防止內部格子超出圓角 */
     background-color: white;
 }
 
+/* 結果矩陣特有的陰影效果 */
 .grid-shadow {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-color);
@@ -175,12 +209,13 @@ button {
 
 .grid-row { display: flex; }
 
+/* 單一網格樣式 */
 .grid-cell {
     width: 65px;
     height: 65px;
     border: 1px solid var(--gray-bg);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 讓文字和箭頭可以上下排列 */
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -191,19 +226,29 @@ button {
     font-weight: 500;
 }
 
+/* 滑鼠懸停格子時的微反白效果 */
 .grid-cell:hover { background-color: #f7fafc; }
 
-/* --- 單元格狀態顏色 (Material Palette) --- */
+/* 狀態顏色設定 
+   (使用 !important 確保覆蓋 :hover 和預設顏色) 
+*/
 .cell-start { background-color: var(--success) !important; color: white; border-color: var(--success); }
 .cell-end { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
 .cell-obstacle { background-color: var(--obstacle) !important; color: #e2e8f0; border-color: var(--obstacle); }
 .cell-path { background-color: var(--path-bg) !important; border-color: #9ae6b4; }
 
-/* --- 箭頭與文字 --- */
-.arrow { font-size: 28px; font-weight: bold; line-height: 1; }
-.arrow-path { color: var(--path-arrow); }
-.arrow-normal { color: var(--normal-arrow); }
+/* =========================================
+   矩陣結果：箭頭與文字排版
+========================================= */
+.arrow { 
+    font-size: 28px; 
+    font-weight: bold; 
+    line-height: 1; 
+}
+.arrow-path { color: var(--path-arrow); } /* 最佳路徑箭頭：深色 */
+.arrow-normal { color: var(--normal-arrow); } /* 其他箭頭：淺灰 */
 
+/* 起點/終點的輔助小字 */
 .small-text {
     font-size: 11px;
     font-weight: 700;
@@ -211,7 +256,9 @@ button {
     margin-bottom: -2px;
 }
 
-/* --- 結果區塊排版 --- */
+/* =========================================
+   結果區塊 (Results Section)
+========================================= */
 .section-title {
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -226,11 +273,12 @@ button {
 
 .optimal-title { color: var(--success); }
 
+/* 並排顯示 Value 和 Policy 矩陣 */
 .result-container {
     display: flex;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* 螢幕不夠寬時自動換行 */
 }
 
 .matrix-wrapper h3 {

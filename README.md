@@ -1,10 +1,12 @@
-# Deep Reinforcement Learning - HW1: Grid World Policy Evaluation
+# Deep Reinforcement Learning - HW1: Grid World Policy Evaluation & Value Iteration
 
-👉 **[點此觀看 Live Demo](https://bibaisafish.github.io/DRL_HW1/)**
+本專案是一個基於強化學習 (Reinforcement Learning) 的「網格世界 (Grid World)」互動式網頁應用程式。完整實作了**策略評估 (Policy Evaluation)** 與**價值迭代 (Value Iteration)** 演算法，並透過視覺化對比兩種演算法的差異與最佳路徑。
+
+👉 **[點此觀看 Live Demo](https://drl-hw-1.vercel.app/)** *(註：若後端部署於 Vercel 等平台，請確保 API 服務正常運行)*
 
 ---
 
-## 🌟 功能 (Features)
+## 🌟 核心功能 (Features)
 
 ### HW1-1: 網格地圖開發 (前端互動)
 * **動態網格生成**：允許用戶自由輸入維度 `n` (範圍從 5 到 9)，動態生成 `n x n` 的網格地圖。
@@ -13,20 +15,29 @@
   2. **終點 (End)**：點擊設定為紅色單元格。
   3. **障礙物 (Obstacles)**：設定 `n-2` 個障礙物，點擊變為灰色單元格（保留原始數字顯示）。
 
-### HW1-2: 策略顯示與價值評估 (核心演算法)
+### HW1-2: 策略顯示與價值評估 (Random Policy Baseline)
 * **策略評估 (Policy Evaluation)**：基於隨機策略（上、下、左、右機率各 25%），透過貝爾曼期望方程式 (Bellman Expectation Equation) 迭代計算出每個狀態的價值 `V(s)`，直到數值收斂。
-* **策略矩陣 (Policy Matrix)**：根據算出的 `V(s)` 推導出 Greedy Policy，在畫面上顯示每個單元格的最佳行動方向（↑, ↓, ←, →），若有多個最佳方向亦會同時顯示。
+* **策略矩陣 (Policy Matrix)**：根據算出的 `V(s)` 推導出 Greedy Policy，在畫面上顯示每個單元格的最佳行動方向。
 * **價值矩陣 (Value Matrix)**：清楚呈現每個單元格最終收斂的預期價值（四捨五入至小數點後兩位）。
+
+### HW1-3: 價值迭代與最佳路徑 (Optimal Policy)
+* **價值迭代 (Value Iteration)**：實作貝爾曼最佳方程式 (Bellman Optimality Equation)，精準迭代出每個狀態的最大期望回報 $V^*(s)$。
+* **最佳政策推導**：根據 $V^*(s)$ 推導出絕對的最佳行動方向（演算法具備打破平手機制，確保單元格呈現單一明確的箭頭）。
+* **最佳路徑高亮視覺化**：後端自動追蹤從起點至終點的最短路徑。在前端渲染時，**路徑上的單元格會以綠色高亮標示且箭頭加深，非路徑的箭頭則以灰色弱化處理**，提供極佳的對比與視覺焦點。
 
 ---
 
 ## 🚀 如何使用 (How to Use)
 
-1. 開啟 [Demo 網頁](https://bibaisafish.github.io/DRL_HW1/)。
-2. 在左上角的輸入框輸入 5 到 9 之間的數字，並點擊 **"Generate Square"** 生成網格。
-3. 根據畫面上方的提示，依序點擊網格來設定：
-   * 第 1 下：設定**起點** (綠色)。
-   * 第 2 下：設定**終點** (紅色)。
-   * 接下來的 `n-2` 下：設定**障礙物** (灰色)。
-4. 設定完成後，點擊下方出現的 **"計算策略與價值 (Calculate)"** 按鈕。
-5. 頁面下方會立刻生成並顯示計算完成的 **Value Matrix** (數值) 與 **Policy Matrix** (方向箭頭)。
+1. 開啟 [Demo 網頁](https://drl-hw-1.vercel.app/)。
+2. 在左上角的輸入框輸入 `5` 到 `9` 之間的數字，並點擊 **"Generate"** 生成網格。
+3. 觀察畫面上方的動態步驟提示，依序點擊網格來設定：
+   * **Step 1**：點擊任意空格設定**起點** (綠色)。
+   * **Step 2**：點擊任意空格設定**終點** (紅色)。
+   * **Step 3**：點擊剩餘空格設定 `n-2` 個**障礙物** (灰色)。
+4. 設定完成後，點擊下方出現的 **"Calculate Policy"** 按鈕。
+   * *(若故意將起點封死，系統會彈出防呆警告提示重置)*。
+5. 頁面下方會立刻生成兩組對比結果：
+   * **上半部 (HW1-2)**：隨機政策下的價值與策略矩陣。
+   * **下半部 (HW1-3)**：最佳政策下的價值、策略矩陣，以及**高亮顯示的最佳路徑**。
+6. 如需重新測試，點擊 **"Reset Grid"** 即可重新設定。
