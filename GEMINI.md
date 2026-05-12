@@ -12,6 +12,15 @@
 
 ## Modification Log
 
+### 2026-05-12 | UI Refactoring: Tabbed Visualization
+- **Problem**: The assignment `hw_description.md` explicitly requires that the optimal policy actions should *replace* the previously displayed random actions, and users should be able to clearly visualize the *changes*. Displaying them statically side-by-side made the replacement less intuitive and consumed too much screen space.
+- **Changes**:
+  - **Frontend (`index.html`, `style.css`, `script.js`)**: 
+    - Refactored the `results` section into an interactive **Tabbed UI**.
+    - Users can now toggle between "HW1-2: Random Policy" and "HW1-3: Optimal Policy" within the same visual container.
+    - Added CSS fade-in animations to make the transition and replacement of actions visually clear.
+- **Result**: Perfectly aligns with the requirement "這些行動應該取代之前顯示的隨機行動" by replacing the content logically in the same view. Greatly improves user interface friendliness and visualizes changes effectively.
+
 ### 2026-05-12 | Fix: Missing Import & UI Restoration
 - **Problem**: 
     - `api/index.py` was missing `import random`, causing a `NameError` during policy evaluation.
