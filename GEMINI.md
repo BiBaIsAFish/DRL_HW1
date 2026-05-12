@@ -7,10 +7,21 @@
 
 ## Grading Criteria Alignment
 - **HW1-1**: Interactive grid setup (Start, End, Obstacles).
-- **HW1-2**: Policy Evaluation using Bellman Expectation Equation. Must display 4-way random arrows.
-- **HW1-3**: Value Iteration using Bellman Optimality Equation. Must display single optimal arrows and highlight the path.
+- **HW1-2**: Policy Evaluation using Bellman Expectation Equation. Displays sampled random actions (single arrows) to represent the random policy.
+- **HW1-3**: Value Iteration using Bellman Optimality Equation. Displays single optimal actions and highlights the best path.
 
 ## Modification Log
+
+### 2026-05-12 | Fix: Missing Import & UI Restoration
+- **Problem**: 
+    - `api/index.py` was missing `import random`, causing a `NameError` during policy evaluation.
+    - `index.html` was missing the visual **Legend** and **Algorithm Descriptions** for HW1-2, which were previously documented but absent in the code.
+- **Changes**:
+    - **Backend (`api/index.py`)**: Added `import random`.
+    - **Frontend (`index.html`)**: 
+        - Restored the `.legend` section within the grid setup.
+        - Added a description for HW1-2 Policy Evaluation (Bellman Expectation Equation).
+- **Result**: Backend stability is restored, and the UI now correctly matches the project specifications and documentation.
 
 ### 2026-05-12 | Fix: HW1-2 Random Policy Sampling Display
 - **Problem**: HW1-2 should display a *sampled* random action (pick one from 4 directions) for each cell, rather than showing all four directions at once.

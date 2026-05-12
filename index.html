@@ -24,6 +24,16 @@
         <div class="setup-section card">
             <h2 id="gridTitle" style="display: none;"></h2>
             
+            <div class="ui-guide">
+                <div class="legend card">
+                    <h3>Grid Legend</h3>
+                    <div class="legend-item"><div class="box start"></div> Start</div>
+                    <div class="legend-item"><div class="box end"></div> End</div>
+                    <div class="legend-item"><div class="box obstacle"></div> Obstacle</div>
+                    <div class="legend-item"><div class="box path"></div> Optimal Path</div>
+                </div>
+            </div>
+
             <div id="instruction-steps">
                 <p id="step1">Step 1: Click to set <strong>START</strong> (Green)</p>
                 <p id="step2">Step 2: Click to set <strong>END</strong> (Red)</p>
@@ -45,6 +55,7 @@
             
             <div class="result-card">
                 <h2 class="section-title">HW1-2: Policy Evaluation <span>(Random Policy)</span></h2>
+                <p class="description">Evaluating the state values under a <strong>Uniform Random Policy</strong> (25% for each action) using the <strong>Bellman Expectation Equation</strong>.</p>
                 <div class="result-container">
                     <div class="matrix-wrapper">
                         <h3>Value Function V(s)</h3>
