@@ -54,31 +54,38 @@
         <div id="results" style="display: none;">
             
             <div class="result-card">
-                <h2 class="section-title">HW1-2: Policy Evaluation <span>(Random Policy)</span></h2>
-                <p class="description">Evaluating the state values under a <strong>Uniform Random Policy</strong> (25% for each action) using the <strong>Bellman Expectation Equation</strong>.</p>
-                <div class="result-container">
-                    <div class="matrix-wrapper">
-                        <h3>Value Function V(s)</h3>
-                        <div id="hw2ValueGrid" class="grid-shadow"></div>
-                    </div>
-                    <div class="matrix-wrapper">
-                        <h3>Policy Matrix</h3>
-                        <div id="hw2PolicyGrid" class="grid-shadow"></div>
+                <h2 class="section-title">RL Results & Visualization</h2>
+                
+                <div class="tabs">
+                    <button id="tab-hw2" class="tab-btn active" onclick="showTab('hw2')">HW1-2: Random Policy</button>
+                    <button id="tab-hw3" class="tab-btn" onclick="showTab('hw3')">HW1-3: Optimal Policy</button>
+                </div>
+
+                <div id="content-hw2" class="tab-content">
+                    <p class="description">Evaluating the state values under a <strong>Uniform Random Policy</strong> (25% for each action) using the <strong>Bellman Expectation Equation</strong>.</p>
+                    <div class="result-container">
+                        <div class="matrix-wrapper">
+                            <h3>Value Function V(s)</h3>
+                            <div id="hw2ValueGrid" class="grid-shadow"></div>
+                        </div>
+                        <div class="matrix-wrapper">
+                            <h3>Policy Matrix (Random)</h3>
+                            <div id="hw2PolicyGrid" class="grid-shadow"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="result-card highlight-card">
-                <h2 class="section-title optimal-title">HW1-3: Value Iteration <span>(Optimal Policy)</span></h2>
-                <p class="description">Using <strong>Bellman Optimality Equation</strong> to find the maximum possible reward and the single best action for each state.</p>
-                <div class="result-container">
-                    <div class="matrix-wrapper">
-                        <h3>Optimal Value V*(s)</h3>
-                        <div id="hw3ValueGrid" class="grid-shadow"></div>
-                    </div>
-                    <div class="matrix-wrapper">
-                        <h3>Optimal Policy</h3>
-                        <div id="hw3PolicyGrid" class="grid-shadow"></div>
+                <div id="content-hw3" class="tab-content" style="display: none;">
+                    <p class="description">Using <strong>Bellman Optimality Equation</strong> to find the maximum possible reward and the single best action for each state. <br><strong style="color: var(--success);">These optimal actions replace the previously displayed random actions.</strong></p>
+                    <div class="result-container">
+                        <div class="matrix-wrapper">
+                            <h3>Optimal Value V*(s)</h3>
+                            <div id="hw3ValueGrid" class="grid-shadow"></div>
+                        </div>
+                        <div class="matrix-wrapper">
+                            <h3>Optimal Policy (Replaced)</h3>
+                            <div id="hw3PolicyGrid" class="grid-shadow"></div>
+                        </div>
                     </div>
                 </div>
             </div>

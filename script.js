@@ -157,10 +157,30 @@ async function submitToFlask() {
         // HW3 Policy 額外傳入最佳路徑 (optimal_path) 以進行高亮渲染
         renderResultGrid('hw3PolicyGrid', data.hw3_policy, 'policy', data.hw3_path);
         
+        // 顯示預設的 HW2 分頁
+        showTab('hw2');
+        
     } catch (error) {
         console.error("Error:", error);
         alert("無法連接到後端伺服器，請確保 API 正在運行中 !");
     }
+}
+
+/* =========================================
+   UI 切換 (Tabs)
+========================================= */
+function showTab(tabId) {
+    // 隱藏所有內容
+    document.getElementById('content-hw2').style.display = 'none';
+    document.getElementById('content-hw3').style.display = 'none';
+    
+    // 移除所有按鈕的 active 狀態
+    document.getElementById('tab-hw2').classList.remove('active');
+    document.getElementById('tab-hw3').classList.remove('active');
+    
+    // 顯示目標內容並加上 active
+    document.getElementById('content-' + tabId).style.display = 'block';
+    document.getElementById('tab-' + tabId).classList.add('active');
 }
 
 /* =========================================
