@@ -95,7 +95,8 @@ def policy_evaluation(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
     """
     HW1-2: 策略評估 (Policy Evaluation)
     評估「隨機策略」(每個方向機率各 25%) 下的狀態價值。
-    使用 Bellman Expectation Equation 進行迭代。
+    公式使用 Bellman Expectation Equation:
+    V(s) = sum_{a} pi(a|s) * [R + gamma * V(s')]
     """
     V = [[0.0 for _ in range(grid_size)] for _ in range(grid_size)]
     
@@ -111,24 +112,32 @@ def policy_evaluation(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
                 v_expected = 0
                 for a in ACTIONS:
                     nr, nc = get_next_state(r, c, a, grid_size, obstacles)
-                    # 隨機策略: pi(a|s) = 0.25
+                    # 均等隨機策略: pi(a|s) = 1 / |A| = 0.25
+                    # 獎勵 R 固定為 -1 (每一移動步扣一分)
                     v_expected += 0.25 * (-1 + gamma * V[nr][nc])
                     
                 new_V[r][c] = v_expected
                 delta = max(delta, abs(v_expected - V[r][c]))
                 
         V = new_V
-        if delta < theta: # 收斂條件
+        if delta < theta: # 判斷數值收斂
             break
             
-    policy = derive_policy(V, grid_size, end, obstacles, gamma)
+    # HW1-2 應顯示隨機策略 (每個方向皆為 25%)，因此每個格子回傳所有可行動方向
+    policy = [[['up', 'down', 'left', 'right'] for _ in range(grid_size)] for _ in range(grid_size)]
+    for r in range(grid_size):
+        for c in range(grid_size):
+            if [r, c] == end or [r, c] in obstacles:
+                policy[r][c] = []
+                
     return V, policy
 
 def value_iteration(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
     """
     HW1-3: 價值迭代 (Value Iteration)
     直接推導最佳政策下的狀態價值。
-    使用 Bellman Optimality Equation (取 max) 進行迭代。
+    公式使用 Bellman Optimality Equation:
+    V(s) = max_{a} [R + gamma * V(s')]
     """
     V = [[0.0 for _ in range(grid_size)] for _ in range(grid_size)]
     
@@ -144,7 +153,7 @@ def value_iteration(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
                 max_v = -float('inf')
                 for a in ACTIONS:
                     nr, nc = get_next_state(r, c, a, grid_size, obstacles)
-                    # 取四個動作中的最大價值 (Greedy)
+                    # 取四個動作中的最大價值 (Greedy Action Selection)
                     v = -1 + gamma * V[nr][nc]
                     if v > max_v: 
                         max_v = v
@@ -153,9 +162,10 @@ def value_iteration(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
                 delta = max(delta, abs(max_v - V[r][c]))
                 
         V = new_V
-        if delta < theta: # 收斂條件
+        if delta < theta: # 判斷數值收斂
             break
             
+    # 根據最終收斂的 V*(s) 推導出 Greedy Policy (最佳政策)
     policy = derive_policy(V, grid_size, end, obstacles, gamma)
     return V, policy
 

@@ -33,12 +33,10 @@ body {
     color: var(--text-main);
     margin: 0;
     padding: 40px 20px;
-    /* 使用 Flexbox 將主內容水平置中 */
     display: flex;
     justify-content: center;
 }
 
-/* 主容器：限制最大寬度，確保在大螢幕上不會過度拉伸 */
 .app-container {
     max-width: 1000px;
     width: 100%;
@@ -61,7 +59,6 @@ h1 {
     color: #1a202c;
 }
 
-/* 標題旁的小標籤 (RL) */
 .badge {
     background: var(--primary);
     color: white;
@@ -77,7 +74,6 @@ h1 {
     font-weight: 300;
 }
 
-/* 共用卡片樣式：帶有柔和陰影與圓角 */
 .card, .result-card {
     background: white;
     padding: 25px 40px;
@@ -89,7 +85,6 @@ h1 {
     text-align: center;
 }
 
-/* 最佳政策結果卡的頂部綠色高亮線 */
 .highlight-card {
     border-top: 5px solid var(--success);
 }
@@ -112,7 +107,6 @@ h1 {
     font-family: inherit;
 }
 
-/* 輸入框聚焦時的藍色光暈 */
 .controls input:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
@@ -129,11 +123,10 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease; /* 按下與懸停的平滑轉場 */
+    transition: all 0.2s ease;
     margin-left: 10px;
 }
 
-/* 利用 transform 做出滑過按鈕微微上浮的效果 */
 .btn-primary { background: var(--primary); color: white; }
 .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
@@ -150,8 +143,61 @@ button {
 .action-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px; /* 按鈕之間的間距 */
+    gap: 15px;
     margin-top: 25px;
+}
+
+/* =========================================
+   UI 指引與圖例 (UI Guide & Legend)
+========================================= */
+.ui-guide {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.legend {
+    padding: 15px 25px !important;
+    text-align: left !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.legend h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.legend-item .box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin-right: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.box.start { background: var(--success); }
+.box.end { background: var(--danger); }
+.box.obstacle { background: var(--obstacle); }
+.box.path { background: var(--path-bg); border-color: #9ae6b4; }
+
+.description {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
 }
 
 /* =========================================
@@ -174,11 +220,10 @@ button {
     transition: all 0.3s ease;
 }
 
-/* 正在進行中的步驟高亮特效 */
 #instruction-steps p.active-step {
     color: var(--primary);
     font-weight: 700;
-    transform: translateX(5px); /* 微微向右縮排突出顯示 */
+    transform: translateX(5px);
 }
 
 #step4 { color: var(--success) !important; font-weight: 700; }
@@ -191,17 +236,15 @@ button {
     justify-content: center;
 }
 
-/* 網格主容器 */
 #gridContainer, .grid-shadow {
     display: inline-flex;
     flex-direction: column;
     border: 2px solid #2d3748;
     border-radius: 8px;
-    overflow: hidden; /* 防止內部格子超出圓角 */
+    overflow: hidden;
     background-color: white;
 }
 
-/* 結果矩陣特有的陰影效果 */
 .grid-shadow {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-color);
@@ -209,13 +252,12 @@ button {
 
 .grid-row { display: flex; }
 
-/* 單一網格樣式 */
 .grid-cell {
     width: 65px;
     height: 65px;
     border: 1px solid var(--gray-bg);
     display: flex;
-    flex-direction: column; /* 讓文字和箭頭可以上下排列 */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -226,12 +268,8 @@ button {
     font-weight: 500;
 }
 
-/* 滑鼠懸停格子時的微反白效果 */
 .grid-cell:hover { background-color: #f7fafc; }
 
-/* 狀態顏色設定 
-   (使用 !important 確保覆蓋 :hover 和預設顏色) 
-*/
 .cell-start { background-color: var(--success) !important; color: white; border-color: var(--success); }
 .cell-end { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
 .cell-obstacle { background-color: var(--obstacle) !important; color: #e2e8f0; border-color: var(--obstacle); }
@@ -241,14 +279,34 @@ button {
    矩陣結果：箭頭與文字排版
 ========================================= */
 .arrow { 
-    font-size: 28px; 
+    font-size: 32px; 
     font-weight: bold; 
     line-height: 1; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
-.arrow-path { color: var(--path-arrow); } /* 最佳路徑箭頭：深色 */
-.arrow-normal { color: var(--normal-arrow); } /* 其他箭頭：淺灰 */
+.arrow-path { color: var(--path-arrow); }
+.arrow-normal { color: var(--normal-arrow); }
 
-/* 起點/終點的輔助小字 */
+/* 當有多個箭頭時 (隨機策略)，縮小字體並排列成 2x2 感 */
+.multiple-arrows .arrow {
+    font-size: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 5px;
+}
+
+.arrow span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .small-text {
     font-size: 11px;
     font-weight: 700;
@@ -273,12 +331,11 @@ button {
 
 .optimal-title { color: var(--success); }
 
-/* 並排顯示 Value 和 Policy 矩陣 */
 .result-container {
     display: flex;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap; /* 螢幕不夠寬時自動換行 */
+    flex-wrap: wrap;
 }
 
 .matrix-wrapper h3 {

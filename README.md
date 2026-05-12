@@ -17,7 +17,7 @@
 
 ### HW1-2: 策略顯示與價值評估 (Random Policy Baseline)
 * **策略評估 (Policy Evaluation)**：基於隨機策略（上、下、左、右機率各 25%），透過貝爾曼期望方程式 (Bellman Expectation Equation) 迭代計算出每個狀態的價值 `V(s)`，直到數值收斂。
-* **策略矩陣 (Policy Matrix)**：根據算出的 `V(s)` 推導出 Greedy Policy，在畫面上顯示每個單元格的最佳行動方向。
+* **策略矩陣 (Policy Matrix)**：顯示正在評估的**隨機策略**（即每個非終點/障礙物單元格皆顯示上、下、左、右四個箭頭，代表各 25% 機率）。
 * **價值矩陣 (Value Matrix)**：清楚呈現每個單元格最終收斂的預期價值（四捨五入至小數點後兩位）。
 
 ### HW1-3: 價值迭代與最佳路徑 (Optimal Policy)
