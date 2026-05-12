@@ -208,11 +208,6 @@ function renderResultGrid(containerId, matrixData, type, optimalPath = null) {
                         const actionList = matrixData[i][j];
                         // 確保該格子有可行動方向
                         if (actionList.length > 0) {
-                            // 若有超過一個箭頭 (隨機策略)，加上特別的 class 以縮小字體
-                            if (actionList.length > 1) {
-                                cellDiv.classList.add('multiple-arrows');
-                            }
-                            
                             const arrowStr = actionList.map(a => `<span>${arrows[a]}</span>`).join('');
                             // 判斷是否為最佳路徑上的箭頭，決定顏色深淺
                             const arrowClass = isPath ? 'arrow-path' : 'arrow-normal';

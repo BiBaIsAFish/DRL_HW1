@@ -123,8 +123,9 @@ def policy_evaluation(grid_size, end, obstacles, theta=1e-4, gamma=1.0):
         if delta < theta: # 判斷數值收斂
             break
             
-    # HW1-2 應顯示隨機策略 (每個方向皆為 25%)，因此每個格子回傳所有可行動方向
-    policy = [[['up', 'down', 'left', 'right'] for _ in range(grid_size)] for _ in range(grid_size)]
+    # HW1-2 應顯示隨機生成的行動 (從上下左右隨機選一個並呈現)
+    action_keys = list(ACTIONS.keys())
+    policy = [[[random.choice(action_keys)] for _ in range(grid_size)] for _ in range(grid_size)]
     for r in range(grid_size):
         for c in range(grid_size):
             if [r, c] == end or [r, c] in obstacles:

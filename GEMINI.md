@@ -12,6 +12,13 @@
 
 ## Modification Log
 
+### 2026-05-12 | Fix: HW1-2 Random Policy Sampling Display
+- **Problem**: HW1-2 should display a *sampled* random action (pick one from 4 directions) for each cell, rather than showing all four directions at once.
+- **Changes**:
+  - **Backend (`api/index.py`)**: Integrated `random.choice` to select exactly one action for each state in the policy evaluation response.
+  - **Frontend (`script.js` & `style.css`)**: Reverted to single-arrow rendering logic and increased arrow size for better visibility.
+- **Result**: HW1-2 now shows a grid of randomly pointing arrows, fulfilling the "隨機生成行動顯示" requirement.
+
 ### 2026-05-12 | Fix: style.css Corruption Cleanup
 - **Problem**: Overlapping edits caused duplication and corrupted characters in `style.css`.
 - **Changes**:

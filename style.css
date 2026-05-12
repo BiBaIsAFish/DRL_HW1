@@ -279,11 +279,10 @@ button {
    矩陣結果：箭頭與文字排版
 ========================================= */
 .arrow { 
-    font-size: 32px; 
+    font-size: 36px; /* 恢復較大的單箭頭尺寸 */
     font-weight: bold; 
     line-height: 1; 
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -291,15 +290,6 @@ button {
 }
 .arrow-path { color: var(--path-arrow); }
 .arrow-normal { color: var(--normal-arrow); }
-
-/* 當有多個箭頭時 (隨機策略)，縮小字體並排列成 2x2 感 */
-.multiple-arrows .arrow {
-    font-size: 18px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    padding: 5px;
-}
 
 .arrow span {
     display: flex;
